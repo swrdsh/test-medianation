@@ -4,7 +4,11 @@ on:
   push:
     branches: [denis]
   pull_request:
-    branches: [master]
+    branches: [master]'
+
+permissions:
+  contents: read
+  security-events: write
 
 jobs:
   lint:
