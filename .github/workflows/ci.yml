@@ -2,10 +2,10 @@ name: CI
 
 on:
   push:
-    branches: [master]
-
+    branches: [denis]
   pull_request:
     branches: [master]
+
 
 
 jobs:
@@ -14,16 +14,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v3
+
       - name: Python Lint Code Scanning Action
-      uses: advanced-security/python-lint-code-scanning-action@v1.1.2
+        uses: advanced-security/python-lint-code-scanning-action@v1.1.2
+
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
 
 
   tests:
     name: Run tests
     runs-on: ubuntu-latest
 
-    needs: lint
+    needs: [lint]
 
     steps:
-      - name:
-      uses:
+      - uses: actions/checkout@v3
+      
+      - name: Python lint code scanning action
+        uses: advanced-security/python-lint-code-scanning-action@v1.1.2
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Test
+        run: npm run test
