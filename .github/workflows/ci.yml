@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+
+  pull_request:
+    branches: [master]
+
+
+jobs:
+  lint:
+    name: Run code linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Python Lint Code Scanning Action
+      uses: advanced-security/python-lint-code-scanning-action@v1.1.2
+
+
+  tests:
+    name: Run tests
+    runs-on: ubuntu-latest
+
+    needs: lint
+
+    steps:
+      - name:
+      uses:
